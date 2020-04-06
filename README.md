@@ -23,7 +23,7 @@
 ,`;`.                                             
 ```
 
------------
+
 ## Overview
 
 Dinorun is a side scrolling platform game where the levels are procedurally generated based on audio files uplaoded by the user. 
@@ -32,7 +32,7 @@ It's built as a single page application, with a responsive design. It is played 
 
 The levels and scores are stored in a PSQL database, with the top three scores for the current level are displayed on the end screen.
 
------------
+
 ## Note
 
 This project was originally a Makers Academy final project, which has since been exported and modifed by myself. To see the original repository, please click [here](https://github.com/cpcwood/technodactyl-studios-dinorun).
@@ -83,6 +83,7 @@ The application uses Ruby on Rails default application server: Puma. The configu
 
 To start the server run ```rails server``` in the relevant RAILS_ENV environment.
 
+-----------
 ## Running Tests
 
 Testing Suites: 
