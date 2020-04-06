@@ -17,12 +17,8 @@
 /storage/*
 !/storage/.keep
 
-/public/assets
 .byebug_history
-
-# Ignore master key for decrypting credentials and more.
-/config/master.key
-
+/public/assets
 /public/packs
 /public/packs-test
 /node_modules
@@ -30,7 +26,22 @@
 yarn-debug.log*
 .yarn-integrity
 
+# Damn DS_Store
 .DS_Store
+
 # Ignore application configuration
 /config/application.yml
 /coverage
+
+# Ignore keys for decrypting credentials and more.
+/config/master.key
+/config/credentials/test.key
+/config/credentials/production.key
+
+# Puma shared files
+shared/log/**
+!shared/log/.keep
+shared/pids/**
+!shared/pids/.keep
+shared/sockets/**
+!shared/sockets/.keep

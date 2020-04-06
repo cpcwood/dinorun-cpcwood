@@ -1,6 +1,7 @@
+#### Technodactyl Studios presents their debut game:
 # Dinorun
+--------
 
-### Technodactyl Studios resents their debut game - DINORUN
 ```
                   ,                                                            .') \|/________________
                ,  ;:._.-`''.                                            ...-~ .' .'               . - ~
@@ -22,22 +23,7 @@
 , .;`      `'::''`                                                
 ,`;`.                                             
 ```
-
-
-
-
-    
-
-             
-             
-
-
-
-
-
-
-
-
+--------
 ## Overview
 
 Dinorun is a side scrolling platform game where the levels are procedurally generated based on audio files uplaoded by the user. 
@@ -48,6 +34,8 @@ The level scores are stored in a database. The top three scores for the current 
 
 ## How to Install
 
+#### Prerequisites
+
 The application has been developed using Ruby v2.6.5, Ruby on Rails v6.0.2.2 and PostgreSQL. Therefore to install the application please ensure you have the following installed:
 - ruby 2.6.5 (can be installed from the terminal using homebrew ```brew install ruby``` and version checked using rvm ```rvm use 2.6.5```)
 - bundler (can be installed from the terminal through ruby gems ```gem install bundler```)
@@ -55,37 +43,48 @@ The application has been developed using Ruby v2.6.5, Ruby on Rails v6.0.2.2 and
 
 Once the above has been installed, clone or download the git repository, move to the program root directory, then run the following in the command line to install the program:
 
+```bash
+bundle install
+yarn install
 ```
-bundle
-yarn
-```
 
-Since the application requires persistent data, such as users and mp3 files, a PSQL database is used in conjunction with ApplicationRecord. To set the database up, first ensure you have PSQL installed and running as a service, then create a copy of ```config/example.application.yml``` named as ```application.yml```. Inside this new file, insert your database credentials.
+#### Credientials and Database
 
-To use AWS S3 in production open rails credentials using ```EDITOR=vim rails credentials:edit``` in the command line and add your IAM credentials in the AWS section.
+Since the application requires persistent data, such as users and mp3 files, a PSQL database is used in conjunction with ApplicationRecord. To set the database up, first ensure you have PSQL installed and running as a service. Then create the revelant rails credentials for each environment as shown below. The application is set up to have three different environments, if you are developing the application further, please set up credientals for all three, however if you are only installing production, skip 'development' credientals and perform all commands with the environment variable ```RAILS_ENV=production```.
 
-To setup the database tables with the correct schema run the following in the command line:
+Development:
+- Fill in the template for the global credientals, which be found in ```config/credentials/credentials.yml.enc.template```
+- Open the rails credentials in your editor of choice ```EDITOR=vim rails credentials:edit``` (if this if your first time opening the credentials, a new rails master key ```config/master.key``` to encrypt the credentials will be generated, do not check this into your version control)
+- Add the filled template to the credentials list, then save and exit
 
-```
+Production:
+- Fill in the template for the production credientals, which be found in ```config/credentials/production.yml.enc.template```
+- Open the rails credentials in your editor of choice ```EDITOR=vim rails credentials:edit -e production``` (if this if your first time opening the credentials, a new rails production key ```config/credentials/production.key``` to encrypt the credentials will be generated, do not check this into your version control)
+- Add the filled template to the credentials list, then save and exit
+
+
+To setup the development and test database tables with the correct schema run the following in the command line:
+```bash
 rails db:create
 rails db:migrate
 ```
 
-## How to Run
+#### Server Configuration
 
-To run the application in development, run `rails s` in the command line, then navigate to `http://localhost:3000/`.
+The application uses Ruby on Rails default application server: Puma. The configuration for the puma server are in ```config/puma.rb```. The server is currently setup to listen for packets on the local unix socket ```shared/sockets/puma.sock```, to change the server to listen on a localhost port, comment the unix socket line and uncomment the local server port line to host on `http://localhost:3000/`.
 
-To run the application in production, ensure the environment variable ```ENVIRONMENT=production``` is set before running `rails s`.
+#### How to run
 
+To start the server run ```rails server``` in the relevant RAILS_ENV environment.
 
-### Running Tests
+## Running Tests
 
 Testing Suites: 
 - Backend - Rspec, Capybara 
 - Frontend - Jasmine
 
 To run the backend tests run `rspec` in the command line
-To run the frontend tests run `rails s` in the command line, then navigate to `http://localhost:3000/jasmine`
+To run the frontend tests run `rails s` in the command line, then navigate to `http://localhost:3000/jasmine` (ensure the server is set to run on localhost, see [above](####Server-Configuration))
 
 ## Gameplay
 

@@ -52,6 +52,12 @@ ActiveRecord::Schema.define(version: 2020_03_10_101203) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "takeaway", id: :serial, force: :cascade do |t|
+    t.string "item", limit: 60
+    t.string "category", limit: 60
+    t.integer "price"
+  end
+
   create_table "users", force: :cascade do |t|
     t.text "username"
     t.text "email"
