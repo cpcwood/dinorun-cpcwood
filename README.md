@@ -1,6 +1,5 @@
 #### Technodactyl Studios presents their debut game:
 # Dinorun
---------
 
 ```
                   ,                                                            .') \|/________________
@@ -23,14 +22,18 @@
 , .;`      `'::''`                                                
 ,`;`.                                             
 ```
---------
+
 ## Overview
 
 Dinorun is a side scrolling platform game where the levels are procedurally generated based on audio files uplaoded by the user. 
 
-It's built as a Single Page App, with a responsive design. It is played using the keyboard and also has touch screen controls so can be played on phone or tablet devices.
+It's built as a single page application, with a responsive design. It is played using the keyboard and also has touch screen controls so can be played on phone or tablet devices.
 
-The level scores are stored in a database. The top three scores for the current level are displayed on the end screen.
+The levels and scores are stored in a PSQL database, with the top three scores for the current level are displayed on the end screen.
+
+## Note
+
+This project was originally a Makers Academy final project, which has since been exported and modifed by myself. To see the original repository, please click [here](https://github.com/cpcwood/technodactyl-studios-dinorun).
 
 ## How to Install
 
@@ -97,21 +100,14 @@ To run the frontend tests run `rails s` in the command line, then navigate to `h
 #### Win Screen
 ![Gameplay](docs/dinorun_win.png)
 
-### Game Engine Flow
+## Game Engine Flow
 
-Game developed in pure Javascript without frameworks. 
+Game engine developed in pure Javascript without frameworks.
 
-![Game Flow]()
+![Game Engine Flow](docs/game_engine_flow.png)
 
+## Audio Analysis Flow
 
-## Credits
+Audio analysis using Javascript Web Audio API peak analysis.
 
-[Chris Wood](https://github.com/cpcwood)
-
-[Ben Gittins](https://github.com/squareben1)
-
-[Umberto Valente](https://github.com/Uvalente)
-
-[Shuenn Yuh Low](https://github.com/shaunlsy)
-
-[Imraan Ali](https://github.com/Immers23)
+![Audio Analysis Flow](docs/audio_analysis_flow.png)
