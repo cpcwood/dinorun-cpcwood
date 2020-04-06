@@ -23,6 +23,7 @@
 ,`;`.                                             
 ```
 
+-----------
 ## Overview
 
 Dinorun is a side scrolling platform game where the levels are procedurally generated based on audio files uplaoded by the user. 
@@ -31,10 +32,12 @@ It's built as a single page application, with a responsive design. It is played 
 
 The levels and scores are stored in a PSQL database, with the top three scores for the current level are displayed on the end screen.
 
+-----------
 ## Note
 
 This project was originally a Makers Academy final project, which has since been exported and modifed by myself. To see the original repository, please click [here](https://github.com/cpcwood/technodactyl-studios-dinorun).
 
+-----------
 ## How to Install
 
 #### Prerequisites
@@ -89,6 +92,7 @@ Testing Suites:
 To run the backend tests run `rspec` in the command line
 To run the frontend tests run `rails s` in the command line, then navigate to `http://localhost:3000/jasmine` (ensure the server is set to run on localhost, see [above](####Server-Configuration))
 
+-----------
 ## Gameplay
 
 #### Song Selection
@@ -100,12 +104,14 @@ To run the frontend tests run `rails s` in the command line, then navigate to `h
 #### Win Screen
 ![Gameplay](docs/dinorun_win.png)
 
+-----------
 ## Game Engine Flow
 
 Game engine developed in pure Javascript without frameworks.
 
 ![Game Engine Flow](docs/game_engine_flow.png)
 
+-----------
 ## Audio Analysis Flow
 
 Audio analysis using Javascript Web Audio API peak analysis.
