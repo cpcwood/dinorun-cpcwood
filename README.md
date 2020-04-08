@@ -46,6 +46,7 @@ The application has been developed using Ruby v2.6.5, Ruby on Rails v6.0.2.2 and
 - ruby 2.6.5 (can be installed from the terminal using homebrew ```brew install ruby``` and version checked using rvm ```rvm use 2.6.5```)
 - bundler (can be installed from the terminal through ruby gems ```gem install bundler```)
 - PostgreSQL (can be installed from the terminal using homebrew ```brew install postgres```)
+- yarn (can be installed from the terminal using homebrew ```brew install yarn```)
 
 Once the above has been installed, clone or download the git repository, move to the program root directory, then run the following in the command line to install the program:
 
