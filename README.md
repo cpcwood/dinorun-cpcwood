@@ -57,7 +57,9 @@ yarn install
 
 #### Credientials and Database
 
-Since the application requires persistent data, such as users and mp3 files, a PSQL database is used in conjunction with ApplicationRecord. To set the database up, first ensure you have PSQL installed and running as a service. Then create the revelant rails credentials for each environment as shown below. The application is set up to have three different environments, if you are developing the application further, please set up credientals for all three, however if you are only installing production, skip 'development' credientals and perform all commands with the environment variable ```RAILS_ENV=production```.
+Since the application requires persistent data, such as users and mp3s, a PSQL database is used in conjunction with ApplicationRecord. To set the database up, first ensure you have PSQL installed and running as a service. Then create the revelant rails credentials for each environment as shown below. 
+
+The application is set up to have three different environments, if you are developing the application further, please set up credientals for all three, however if you are only installing production, skip 'development' credientals and perform all commands with the environment variable ```RAILS_ENV=production```.
 
 Development:
 - Fill in the template for the global credientals, which be found in ```config/credentials/credentials.yml.enc.template```
@@ -119,3 +121,7 @@ Game engine developed in pure Javascript without frameworks.
 Audio analysis using Javascript Web Audio API peak analysis.
 
 ![Audio Analysis Flow](docs/audio_analysis_flow.png)
+
+## License
+
+Distributed under the MIT License. See `LICENSE` for more information.
