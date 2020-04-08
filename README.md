@@ -42,11 +42,11 @@ This project was originally a Makers Academy final project, which has since been
 
 #### Prerequisites
 
-The application has been developed using Ruby v2.6.5, Ruby on Rails v6.0.2.2 and PostgreSQL. Therefore to install the application please ensure you have the following installed:
-- ruby 2.6.5 (can be installed from the terminal using homebrew ```brew install ruby``` and version checked using rvm ```rvm use 2.6.5```)
-- bundler (can be installed from the terminal through ruby gems ```gem install bundler```)
-- PostgreSQL (can be installed from the terminal using homebrew ```brew install postgres```)
-- yarn (can be installed from the terminal using homebrew ```brew install yarn```)
+The application has been developed using Ruby v2.6.5, Ruby on Rails v6.0.2.2, and PostgreSQL 12.1. Therefore, to setup the application please ensure you have the [Homebrew](https://brew.sh/) package manager the following installed:
+- [Ruby](https://www.ruby-lang.org/en/) v2.6.5 (can be installed from the terminal using the ruby package manager [RVM](https://rvm.io/rvm/install) command ```rvm install 2.6.5```)
+- [PostgreSQL](https://www.postgresql.org/) v12.1 (can be installed from the terminal using homebrew ```brew install postgres@12.1```)
+- [Yarn](https://yarnpkg.com/) v1.22 (can be installed from the terminal using homebrew ```brew install yarn```)
+- [Bundler](https://bundler.io/) v2.1.4 (can be installed from the terminal through ruby gems ```gem install bundler```)
 
 Once the above has been installed, clone or download the git repository, move to the program root directory, then run the following in the command line to install the program:
 
@@ -80,7 +80,7 @@ rails db:migrate
 
 #### Server Configuration
 
-The application uses Ruby on Rails default application server: Puma. The configuration for the puma server are in ```config/puma.rb```. The server is currently setup to listen for packets on the local unix socket ```shared/sockets/puma.sock```, to change the server to listen on a localhost port, comment the unix socket line and uncomment the local server port line to host on `http://localhost:3000/`.
+The application uses Ruby on Rails default application server: Puma. The configuration for the puma server are in ```config/puma.rb```. The server is currently setup to listen for requests on the local unix socket ```shared/sockets/puma.sock```, to change the server to listen on a localhost port, comment the unix socket line and uncomment the local server port line to host on `http://localhost:3000/`.
 
 #### How to run
 
