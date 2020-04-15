@@ -26,7 +26,7 @@
 
 ## Overview
 
-Dinorun is a side scrolling platform game where the levels are procedurally generated based on audio files uplaoded by the user. 
+Dinorun is a side scrolling platform game where the levels are procedurally generated based on audio files uploaded by the user. 
 
 It's built as a single page application, with a responsive design. It is played using the keyboard and also has touch screen controls so can be played on phone or tablet devices.
 
@@ -55,19 +55,19 @@ bundle install
 yarn install
 ```
 
-#### Credientials and Database
+#### Credentials and Database
 
-Since the application requires persistent data, such as users and mp3s, a PSQL database is used in conjunction with ApplicationRecord. To set the database up, first ensure you have PSQL installed and running as a service. Then create the revelant rails credentials for each environment as shown below. 
+Since the application requires persistent data, such as users and mp3s, a PSQL database is used in conjunction with ApplicationRecord. To set the database up, first ensure you have PSQL installed and running as a service. Then create the relevant rails credentials for each environment as shown below. 
 
-The application is set up to have three different environments, if you are developing the application further, please set up credientals for all three, however if you are only installing production, skip 'development' credientals and perform all commands with the environment variable ```RAILS_ENV=production```.
+The application is set up to have three different environments, if you are developing the application further, please set up credentials for all three, however if you are only installing production, skip 'development' credentials and perform all commands with the environment variable ```RAILS_ENV=production```.
 
 Development:
-- Fill in the template for the global credientals, which be found in ```config/credentials/credentials.yml.enc.template```
+- Fill in the template for the global credentials, which be found in ```config/credentials/credentials.yml.enc.template```
 - Open the rails credentials in your editor of choice ```EDITOR=vim rails credentials:edit``` (if this if your first time opening the credentials, a new rails master key ```config/master.key``` to encrypt the credentials will be generated, do not check this into your version control)
 - Add the filled template to the credentials list, then save and exit
 
 Production:
-- Fill in the template for the production credientals, which be found in ```config/credentials/production.yml.enc.template```
+- Fill in the template for the production credentials, which be found in ```config/credentials/production.yml.enc.template```
 - Open the rails credentials in your editor of choice ```EDITOR=vim rails credentials:edit -e production``` (if this if your first time opening the credentials, a new rails production key ```config/credentials/production.key``` to encrypt the credentials will be generated, do not check this into your version control)
 - Add the filled template to the credentials list, then save and exit
 

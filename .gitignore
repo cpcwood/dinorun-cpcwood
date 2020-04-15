@@ -27,7 +27,7 @@ yarn-debug.log*
 .yarn-integrity
 
 # Damn DS_Store
-.DS_Store
+*.DS_Store
 
 # Ignore application configuration
 /config/application.yml
@@ -39,9 +39,9 @@ yarn-debug.log*
 /config/credentials/production.key
 
 # Puma shared files
-shared/log/*
-!shared/log/.keep
-shared/pids/*
-!shared/pids/.keep
-shared/sockets/*
-!shared/sockets/.keep
+shared/log/**
+shared/pids/**
+shared/sockets/**
+
+# Keep empty directories
+!*.keep
