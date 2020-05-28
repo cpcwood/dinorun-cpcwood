@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
@@ -9,15 +11,16 @@ class ApplicationController < ActionController::Base
   private
 
   def require_login
-    render :nothing => true, :status => 403 unless session[:user_id]
+    render(nothing: true, status: 403) unless session[:user_id]
   end
 
   def assign_user
-    begin
-      @user = User.find(session[:user_id]) if session[:user_id]
-    rescue
-      reset_session
-      redirect_to('/')
+    if session[:user_id]
+      @user = User.find_by(id: session[:user_id])
+      unless @user
+        reset_session
+        redirect_to('/')
+      end
     end
   end
 

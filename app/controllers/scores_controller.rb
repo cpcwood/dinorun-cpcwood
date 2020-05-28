@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ScoresController < ApplicationController
   def create
     score = Score.new(score_params)
@@ -5,15 +7,15 @@ class ScoresController < ApplicationController
 
     if score.valid?
       score.save
-      render json: {score: "saved"}
+      render json: { score: 'saved' }
     else
-      render json: {score: "not saved"}
+      render json: { score: 'not saved' }
     end
   end
 
   def show
     top_three = Score.where(song_id: params[:id]).order(score: :desc).first(3)
-    render json: top_three.map{ |score| {score: score.score, username: score.user.username}}
+    render json: top_three.map { |score| { score: score.score, username: score.user.username } }
   end
 
   private

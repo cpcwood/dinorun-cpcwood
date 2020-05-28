@@ -1,7 +1,8 @@
+# frozen_string_literal: true
 
 def log_in
   visit '/'
-  click_button "Login"
+  click_button 'Login'
   sleep(1)
   fill_in 'login[email]', with: 'imraan21@hotmail.co.uk'
   fill_in 'login[password]', with: 'securepass1'
@@ -10,7 +11,7 @@ end
 
 def sign_up
   visit '/'
-  click_button "Signup"
+  click_button 'Signup'
   sleep(1)
   fill_in 'register[username]', with: 'Imraan'
   fill_in 'register[email]', with: 'imraan21@hotmail.co.uk'

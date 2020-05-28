@@ -1,12 +1,13 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require './spec/features/web_helpers'
 
 feature 'user can signup', js: true do
-
   scenario 'user needs to click signup to show the form', driver: :selenium_chrome_headless do
     visit '/'
-    expect(page).not_to have_button("Register")
-    click_button "Signup"
+    expect(page).not_to have_button('Register')
+    click_button 'Signup'
     expect(page).to have_button 'Register'
   end
 
@@ -24,7 +25,7 @@ feature 'user can signup', js: true do
   scenario 'user can not sign up with an email already registered', driver: :selenium_chrome_headless do
     User.create(username: 'Imraan', email: 'imraan21@hotmail.co.uk', password: 'securepass1')
     visit '/'
-    click_button "Signup"
+    click_button 'Signup'
     fill_in 'register[username]', with: 'Imraan'
     fill_in 'register[email]', with: 'imraan21@hotmail.co.uk'
     fill_in 'register[password]', with: 'sec'

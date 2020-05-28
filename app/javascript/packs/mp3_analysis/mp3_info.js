@@ -30,22 +30,22 @@ class SongAnalyser{
     filter.type = "lowpass"
     source.connect(filter)
     filter.connect(offlineContext.destination)
-    self = this
+    var songAnalyser = this
 
     offlineContext.startRendering().then( function(lowPassAudioBuffer) {
       // Tempo
       var pcmData = lowPassAudioBuffer.getChannelData(0)
-      var normalizedPCMData = self.normalizeArray(pcmData)
-      var tempo = self.analyseTempo(normalizedPCMData, lowPassAudioBuffer.sampleRate)
+      var normalizedPCMData = songAnalyser.normalizeArray(pcmData)
+      var tempo = songAnalyser.analyseTempo(normalizedPCMData, lowPassAudioBuffer.sampleRate)
       song_bpm.value = tempo
 
       // Amplitude Array
-      var maxSampleAmplitude = self.bufferToMaxAmplitudePerBeat(lowPassAudioBuffer, tempo)
-      maxSampleAmplitude = self.normalizeArray(maxSampleAmplitude)
+      var maxSampleAmplitude = songAnalyser.bufferToMaxAmplitudePerBeat(lowPassAudioBuffer, tempo)
+      maxSampleAmplitude = songAnalyser.normalizeArray(maxSampleAmplitude)
       song_analysed.value = JSON.stringify(maxSampleAmplitude)
 
       // Post completion
-      self.showCreateSongButton()
+      songAnalyser.showCreateSongButton()
     })
     source.start()
   }
@@ -76,13 +76,9 @@ class SongAnalyser{
   }
 
   analyseTempo(normalizedPCMData, sampleRate) {
-    console.log(normalizedPCMData)
     var peaksArray = this.getPeaksAtThreshold(normalizedPCMData, 750)
-    console.log(peaksArray)
     var tempoCounts = this.countIntervalsBetweenNearbyPeaks(peaksArray, sampleRate)
-    console.log(tempoCounts)
     var tempo = tempoCounts.sort((a, b) => b.count - a.count)[0].tempo
-    console.log(tempo)
     return tempo
   }
 
@@ -135,15 +131,12 @@ class SongAnalyser{
         let avgValueAmplitude = 0
         // sum the samples across all channels
         for (let k = 0; k < numChannels; k++) {
-          avgValueAmplitude += audioBuffer.getChannelData(k)[i + j]
+          avgValueAmplitude += audioBuffer.getChannelData(k)[i + j] / numChannels
         }
-        avgValueAmplitude /= numChannels
-        if (maxSampleAmplitude < avgValueAmplitude) {
-          maxSampleAmplitude = avgValueAmplitude
-        }
+        if (maxSampleAmplitude < avgValueAmplitude) maxSampleAmplitude = avgValueAmplitude
       }
       amplitudeArray.push(maxSampleAmplitude)
-      if (i + sampleSize > audioBuffer.length) {
+      if (i + sampleSize >= audioBuffer.length) {
         return amplitudeArray
       }
     }

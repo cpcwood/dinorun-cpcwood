@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require './spec/features/web_helpers'
 
@@ -8,7 +10,7 @@ feature 'user can login', js: true do
     expect(page).to have_content 'Imraan welcome back to DinoRun!'
   end
 
-  scenario 'user clicks login and fills in form', driver: :selenium_chrome_headless do
+  scenario 'user fails login', driver: :selenium_chrome_headless do
     log_in
     expect(page).to have_content 'Email or password is not correct!'
   end

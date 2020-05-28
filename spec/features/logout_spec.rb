@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require './spec/features/web_helpers'
 
@@ -6,7 +8,7 @@ feature 'user can login', js: true do
     User.create(username: 'Imraan', email: 'imraan21@hotmail.co.uk', password: 'securepass1')
     log_in
     click_button 'Logout'
-    expect(page).not_to have_button "Logout"
-    expect(page).to have_button "Signup"
+    expect(page).not_to have_button 'Logout'
+    expect(page).to have_button 'Signup'
   end
 end
