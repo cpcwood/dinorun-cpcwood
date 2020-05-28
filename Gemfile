@@ -48,6 +48,9 @@ group :test do
   # Gotta cover them all
   gem 'simplecov', require: false
   gem 'simplecov-console', require: false
+  # Code policing with rubocop
+  gem 'rubocop-rails', '~> 2.5.2', require: false
+  gem 'rubocop-performance', '~> 1.5.2', require: false
 end
 
 group :development, :test do
