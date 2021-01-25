@@ -35,7 +35,7 @@ The levels and scores are stored in a PSQL database, with the top three scores f
 
 ## Note
 
-This project was originally a Makers Academy final project, which has since been exported and modifed by myself. To see the original repository, please click [here](https://github.com/cpcwood/technodactyl-studios-dinorun).
+This project was originally a Makers Academy final project, which I have exported and modifed. To see the original repository, please click [here](https://github.com/cpcwood/technodactyl-studios-dinorun).
 
 -----------
 ## How to Install
