@@ -1,14 +1,22 @@
 require: rubocop-rails
 
 AllCops:
+  TargetRubyVersion: 2.7.2
+  Exclude:
+    - 'bin/**/*'
+    - 'config/**/*'
+    - 'coverage/**/*'
+    - 'db/**/*'
+    - 'lib/**/*'
+    - 'log/**/*'
+    - 'node_modules/**/*'
+    - 'shared/**/*'
+    - 'storage/**/*'
+    - 'script/**/*'
+    - 'vendor/**/*'
+    - '*.js.erb'
   NewCops: enable
   SuggestExtensions: false
-  Exclude:
-    - 'db/**/*'
-    - 'config/**/*'
-    - 'script/**/*'
-    - 'bin/**/*'
-    - 'node_modules/**/*'
   
 Bundler/OrderedGems:
   Enabled: false
