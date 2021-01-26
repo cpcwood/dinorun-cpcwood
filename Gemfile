@@ -33,7 +33,7 @@ group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'web-console', '>= 3.3.0'
   # Load development and test env
-  gem "dotenv", "~> 2.7"
+  gem 'dotenv', '~> 2.7'
 end
 
 group :test do
@@ -51,6 +51,8 @@ group :test do
   # Code policing with rubocop
   gem 'rubocop-rails', require: false
   gem 'rubocop-performance', require: false
+  # Coverage badge with coveralls
+  gem 'coveralls', require: false
   # Format tests for circleci
   gem 'rspec_junit_formatter'
 end

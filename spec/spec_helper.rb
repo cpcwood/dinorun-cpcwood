@@ -5,6 +5,8 @@ require File.expand_path('../config/environment', __dir__)
 abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'rspec/rails'
 
+`bundle exec rake db:exists && bundle exec rake db:migrate || bundle exec rake db:setup`
+
 require 'capybara/rspec'
 require 'webdrivers'
 
@@ -16,7 +18,8 @@ Capybara.server = :puma, { Silent: true }
 Capybara.default_driver = :headless_chrome_driver
 Capybara.javascript_driver = :headless_chrome_driver
 
-
+require 'coveralls'
+Coveralls.wear!('rails')
 
 require 'simplecov'
 require 'simplecov-console'
@@ -33,12 +36,9 @@ SimpleCov.start 'rails' do
   add_filter '/app/helpers/'
 end
 
-
-
 require 'database_cleaner/active_record'
 
 DatabaseCleaner.strategy = :transaction
-
 
 begin
   ActiveRecord::Migration.maintain_test_schema!
