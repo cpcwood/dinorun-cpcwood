@@ -1,8 +1,8 @@
 require: rubocop-rails
 
 AllCops:
-  TargetRubyVersion: 2.7.2
   NewCops: enable
+  SuggestExtensions: false
   Exclude:
     - 'db/**/*'
     - 'config/**/*'
