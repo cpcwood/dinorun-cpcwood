@@ -57,7 +57,7 @@ jobs:
       - ruby/rspec-test
       - run:
           name: 'Rubocop linter'
-          command: bundle exec rubocop -a
+          command: bundle exec rubocop -a -c ./.rubocop.yml
   build:
     docker:
       - image: docker
