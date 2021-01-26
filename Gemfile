@@ -54,7 +54,10 @@ group :test do
 end
 
 group :production do
+  # s3 media storage
   gem 'aws-sdk-s3', require: false
+  # Timezone data
+  gem 'tzinfo-data'
 end
 
 

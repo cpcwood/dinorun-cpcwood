@@ -22,7 +22,10 @@ Rails.application.configure do
 
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.
-  config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
+  # config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
+
+  # Use application server to serve static assets
+  config.serve_static_assets = true
 
   # Compress CSS using a preprocessor.
   # config.assets.css_compressor = :sass
@@ -48,13 +51,6 @@ Rails.application.configure do
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
 
-  # Use the lowest log level to ensure availability of diagnostic information
-  # when problems arise.
-  config.log_level = :debug
-
-  # Prepend all log lines with the following tags.
-  config.log_tags = [:request_id]
-
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
 
@@ -74,6 +70,15 @@ Rails.application.configure do
 
   # Send deprecation notices to registered listeners.
   config.active_support.deprecation = :notify
+
+  # Use the lowest log level to ensure availability of diagnostic information
+  # when problems arise.
+  config.log_level = :warn
+
+  # Prepend all log lines with the following tags.
+  config.log_tags = [:request_id]
+  config.logger = Logger.new(STDOUT)
+  config.logger.datetime_format = "%Y-%m-%d %H:%M:%S"
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
