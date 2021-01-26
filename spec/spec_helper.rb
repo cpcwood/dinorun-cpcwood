@@ -3,26 +3,25 @@
 ENV['RAILS_ENV'] = 'test'
 require File.expand_path('../config/environment', __dir__)
 abort('The Rails environment is running in production mode!') if Rails.env.production?
-
 require 'rspec/rails'
+
 require 'capybara/rspec'
-require 'database_cleaner/active_record'
-require 'simplecov'
-require 'simplecov-console'
 require 'webdrivers'
 
 Capybara.register_driver :headless_chrome_driver do |app|
   options = ::Selenium::WebDriver::Chrome::Options.new(args: ['--headless', '--no-sandbox'])
   Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
 end
-
 Capybara.server = :puma, { Silent: true }
 Capybara.default_driver = :headless_chrome_driver
 Capybara.javascript_driver = :headless_chrome_driver
 
-DatabaseCleaner.strategy = :transaction
 
-SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([SimpleCov::Formatter::Console])
+
+require 'simplecov'
+require 'simplecov-console'
+
+SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([SimpleCov::Formatter::Console, Coveralls::SimpleCov::Formatter])
 SimpleCov.start 'rails' do
   add_filter '/bin/'
   add_filter '/db/'
@@ -33,6 +32,13 @@ SimpleCov.start 'rails' do
   add_filter '/app/mailers/'
   add_filter '/app/helpers/'
 end
+
+
+
+require 'database_cleaner/active_record'
+
+DatabaseCleaner.strategy = :transaction
+
 
 begin
   ActiveRecord::Migration.maintain_test_schema!

@@ -51,6 +51,8 @@ group :test do
   # Code policing with rubocop
   gem 'rubocop-rails', require: false
   gem 'rubocop-performance', require: false
+  # Format tests for circleci
+  gem 'rspec_junit_formatter'
 end
 
 group :production do
