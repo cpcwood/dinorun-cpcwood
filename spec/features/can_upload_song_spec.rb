@@ -1,9 +1,7 @@
 # frozen_string_literal: true
-
-require 'rails_helper'
 require './spec/features/web_helpers'
 
-feature 'user can upload song', js: true do
+feature 'user can upload song' do
   scenario ' user clicks choose file and upload song', driver: :selenium_chrome_headless do
     User.create(username: 'Imraan', email: 'imraan21@hotmail.co.uk', password: 'securepass1')
     log_in

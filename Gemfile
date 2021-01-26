@@ -38,19 +38,19 @@ group :test do
   # Test those files
   gem 'rspec-rails'
   # Adds support for Capybara system testing
-  gem 'capybara'
+  gem 'capybara', require: false
   # Easy installation and use of web drivers to run system tests with browsers
-  gem 'webdrivers'
+  gem 'webdrivers', '~> 4.0', require: false
   # Cleaning up the databases in testing
-  gem 'database_cleaner-active_record'
+  gem 'database_cleaner-active_record', require: false 
   # Gotta cover them all
-  gem 'simplecov'
-  gem 'simplecov-console'
+  gem 'simplecov', require: false
+  gem 'simplecov-console', require: false
   # Code policing with rubocop
-  gem 'rubocop-rails'
-  gem 'rubocop-performance'
+  gem 'rubocop-rails', require: false
+  gem 'rubocop-performance', require: false
 end
 
 group :production do
-  gem 'aws-sdk-s3'
+  gem 'aws-sdk-s3', require: false
 end

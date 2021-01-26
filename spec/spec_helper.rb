@@ -1,22 +1,25 @@
 # frozen_string_literal: true
+ENV['RAILS_ENV'] = 'test'
 
-require 'capybara'
+require File.expand_path('../config/environment', __dir__)
+
+# Prevent database truncation if the environment is production
+abort('The Rails environment is running in production mode!') if Rails.env.production?
+require 'rspec/rails'
+require 'capybara/rspec'
 require 'database_cleaner/active_record'
 require 'simplecov'
 require 'simplecov-console'
-require 'rails_helper'
+require 'webdrivers'
 
-Capybara.register_driver :headless_chrome do |app|
-  caps = Selenium::WebDriver::Remote::Capabilities.chrome(loggingPrefs: { browser: 'ALL' })
-  opts = Selenium::WebDriver::Chrome::Options.new
-
-  chrome_args = %w[--headless --no-sandbox --disable-gpu --window-size=1920,1080 --remote-debugging-port=9222]
-  chrome_args.each { |arg| opts.add_argument(arg) }
-  Capybara::Selenium::Driver.new(app, browser: :chrome, options: opts, desired_capabilities: caps)
+Capybara.register_driver :headless_chrome_driver do |app|
+  options = ::Selenium::WebDriver::Chrome::Options.new(args: ['--headless', '--no-sandbox'])
+  Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
 end
 
 Capybara.server = :puma, { Silent: true }
-Capybara.default_driver = :headless_chrome
+Capybara.default_driver = :headless_chrome_driver
+Capybara.javascript_driver = :headless_chrome_driver
 
 DatabaseCleaner.strategy = :transaction
 
@@ -25,6 +28,7 @@ SimpleCov.start 'rails' do
   add_filter '/bin/'
   add_filter '/db/'
   add_filter '/spec/'
+  # below excluded until better understanding of directories gained
   add_filter '/app/assets/'
   add_filter '/app/channels/'
   add_filter '/app/jobs/'
@@ -32,9 +36,24 @@ SimpleCov.start 'rails' do
   add_filter '/app/helpers/'
 end
 
+begin
+  ActiveRecord::Migration.maintain_test_schema!
+rescue ActiveRecord::PendingMigrationError => e
+  puts e.to_s.strip
+  exit 1
+end
+
 RSpec.configure do |config|
+  config.fixture_path = "#{::Rails.root}/spec/fixtures"
+  config.use_transactional_fixtures = true
+  config.infer_spec_type_from_file_location!
+
+  # Filter lines from Rails gems in backtraces.
+  config.filter_rails_from_backtrace!
+
   config.before(:each) do
     DatabaseCleaner.start
+    Capybara.current_driver = :headless_chrome_driver
   end
 
   config.after(:each) do

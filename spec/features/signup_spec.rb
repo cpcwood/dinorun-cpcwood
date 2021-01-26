@@ -1,9 +1,7 @@
 # frozen_string_literal: true
-
-require 'rails_helper'
 require './spec/features/web_helpers'
 
-feature 'user can signup', js: true do
+feature 'user can signup' do
   scenario 'user needs to click signup to show the form', driver: :selenium_chrome_headless do
     visit '/'
     expect(page).not_to have_button('Register')

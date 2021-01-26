@@ -1,9 +1,7 @@
 # frozen_string_literal: true
-
-require 'rails_helper'
 require './spec/features/web_helpers'
 
-feature 'user can login', js: true do
+feature 'user can login' do
   scenario 'user clicks logout and can see the sign up/ log in page', driver: :selenium_chrome_headless do
     User.create(username: 'Imraan', email: 'imraan21@hotmail.co.uk', password: 'securepass1')
     log_in
