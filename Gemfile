@@ -6,7 +6,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.6.5'
 
 # Rails
-gem 'rails', '~> 6.0.2', '>= 6.0.2.1'
+gem 'rails', '>= 6.0.2.1'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
 # Use Puma as the app server
@@ -15,10 +15,6 @@ gem 'puma', '~> 4.3'
 gem 'sass-rails', '>= 6'
 # Transpile app-like JavaScript.
 gem 'webpacker', '~> 4.0'
-# Turbolinks makes navigating your web application faster.
-gem 'turbolinks', '~> 5'
-# Build JSON APIs with ease.
-gem 'jbuilder', '~> 2.7'
 # Use Active Model has_secure_password
 gem 'bcrypt', '3.1.12'
 # Reduces boot times through caching; required in config/boot.rb
