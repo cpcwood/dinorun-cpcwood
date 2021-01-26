@@ -10,7 +10,7 @@ metadata:
     cpcwood.com/part-of: dinorun
     cpcwood.com/managed-by: cpcwood
 spec:
-  replicas: 1
+  replicas: 2
   strategy:
     type: RollingUpdate
     rollingUpdate:
