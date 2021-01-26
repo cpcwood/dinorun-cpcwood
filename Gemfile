@@ -3,10 +3,10 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.6.5'
+ruby '2.7.2'
 
 # Rails
-gem 'rails', '>= 6.0.2.1'
+gem 'rails', '>= 6.1.1'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
 # Use Puma as the app server
@@ -35,25 +35,22 @@ group :development do
 end
 
 group :test do
-  # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '>= 2.15'
-  # Easy installation and use of web drivers to run system tests with browsers
-  gem 'webdrivers', require: false
-  # Cleaning up the databases in testing
-  gem 'database_cleaner-active_record', require: false
-  # Gotta cover them all
-  gem 'simplecov', require: false
-  gem 'simplecov-console', require: false
-  # Code policing with rubocop
-  gem 'rubocop-rails', '~> 2.5.2', require: false
-  gem 'rubocop-performance', '~> 1.5.2', require: false
-end
-
-group :development, :test do
   # Test those files
-  gem 'rspec-rails', '~> 3.9.0'
+  gem 'rspec-rails'
+  # Adds support for Capybara system testing
+  gem 'capybara'
+  # Easy installation and use of web drivers to run system tests with browsers
+  gem 'webdrivers'
+  # Cleaning up the databases in testing
+  gem 'database_cleaner-active_record'
+  # Gotta cover them all
+  gem 'simplecov'
+  gem 'simplecov-console'
+  # Code policing with rubocop
+  gem 'rubocop-rails'
+  gem 'rubocop-performance'
 end
 
 group :production do
-  gem 'aws-sdk-s3', require: false
+  gem 'aws-sdk-s3'
 end

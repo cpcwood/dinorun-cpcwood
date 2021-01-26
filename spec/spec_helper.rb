@@ -1,14 +1,22 @@
 # frozen_string_literal: true
 
-require 'capybara/rspec'
+require 'capybara'
 require 'database_cleaner/active_record'
 require 'simplecov'
 require 'simplecov-console'
 require 'rails_helper'
-require 'webdrivers'
 
-Capybara.default_driver = :rack_test
-Capybara.javascript_driver = :selenium_chrome_headless
+Capybara.register_driver :headless_chrome do |app|
+  caps = Selenium::WebDriver::Remote::Capabilities.chrome(loggingPrefs: { browser: 'ALL' })
+  opts = Selenium::WebDriver::Chrome::Options.new
+
+  chrome_args = %w[--headless --no-sandbox --disable-gpu --window-size=1920,1080 --remote-debugging-port=9222]
+  chrome_args.each { |arg| opts.add_argument(arg) }
+  Capybara::Selenium::Driver.new(app, browser: :chrome, options: opts, desired_capabilities: caps)
+end
+
+Capybara.server = :puma, { Silent: true }
+Capybara.default_driver = :headless_chrome
 
 DatabaseCleaner.strategy = :transaction
 
@@ -17,7 +25,6 @@ SimpleCov.start 'rails' do
   add_filter '/bin/'
   add_filter '/db/'
   add_filter '/spec/'
-  # below excluded until better understanding of directories gained
   add_filter '/app/assets/'
   add_filter '/app/channels/'
   add_filter '/app/jobs/'
