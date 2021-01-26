@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+require 'dotenv'
+Dotenv.load('config/env/dev.env')
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 

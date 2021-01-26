@@ -1,20 +1,20 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  username: <%= Rails.application.credentials.psql[:user] %>
-  password: <%= Rails.application.credentials.psql[:password] %>
+  username: <%= ENV['DB_USERNAME'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
   pool: 5
   timeout: 5000
-  host: <%= Rails.application.credentials.psql[:host] %>
+  host: <%= ENV.fetch('DB_HOST') { 'localhost' } %>
 
 development:
   <<: *default
-  database: <%= Rails.application.credentials.psql[:dbname_development] %>
+  database: <%= ENV.fetch('DB_NAME_DEVELOPMENT') { 'dinorun_development' } %>
 
 test:
   <<: *default
-  database: <%= Rails.application.credentials.psql[:dbname_test] %>
+  database: <%= ENV.fetch('DB_NAME_TEST') { 'dinorun_test' } %>
 
 production:
   <<: *default
-  database: <%= Rails.application.credentials.psql[:dbname] %>
+  database: <%= ENV.fetch('DB_NAME_PRODUCTION') { 'dinorun_production' } %>
