@@ -1,10 +1,9 @@
 # frozen_string_literal: true
+
 ENV['RAILS_ENV'] = 'test'
-
 require File.expand_path('../config/environment', __dir__)
-
-# Prevent database truncation if the environment is production
 abort('The Rails environment is running in production mode!') if Rails.env.production?
+
 require 'rspec/rails'
 require 'capybara/rspec'
 require 'database_cleaner/active_record'
@@ -28,7 +27,6 @@ SimpleCov.start 'rails' do
   add_filter '/bin/'
   add_filter '/db/'
   add_filter '/spec/'
-  # below excluded until better understanding of directories gained
   add_filter '/app/assets/'
   add_filter '/app/channels/'
   add_filter '/app/jobs/'

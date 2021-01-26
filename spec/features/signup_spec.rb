@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require './spec/features/web_helpers'
 
 feature 'user can signup' do

@@ -12,12 +12,12 @@ class SongsController < ApplicationController
   # GET /songs/1.json
   def show
     @song = Song.find(params[:id])
-    render json: { 
+    render json: {
       id: @song.id,
-      title: @song.title, 
-      bpm: @song.bpm, 
-      analysed: @song.analysed, 
-      mp3_url: rails_blob_path(@song.mp3_attachment) 
+      title: @song.title,
+      bpm: @song.bpm,
+      analysed: @song.analysed,
+      mp3_url: rails_blob_path(@song.mp3_attachment)
     }
   end
 

@@ -42,7 +42,7 @@ group :test do
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers', '~> 4.0', require: false
   # Cleaning up the databases in testing
-  gem 'database_cleaner-active_record', require: false 
+  gem 'database_cleaner-active_record', require: false
   # Gotta cover them all
   gem 'simplecov', require: false
   gem 'simplecov-console', require: false
