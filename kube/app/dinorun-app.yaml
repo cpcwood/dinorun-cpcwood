@@ -1,0 +1,68 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dinorun-deployment
+  labels:
+    cpcwood.com/name: dinorun
+    cpcwood.com/version: "1.0.0"
+    cpcwood.com/component: application-server
+    cpcwood.com/part-of: dinorun
+    cpcwood.com/managed-by: cpcwood
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 2
+  selector:
+    matchLabels:
+      app: dinorun
+  template:
+    metadata:
+      labels:
+        app: dinorun
+    spec:
+      containers:
+        - name: dinorun
+          image: cpcwood/dinorun:CONTAINER_VERSION
+          ports:
+            - containerPort: 5000
+          envFrom:
+            - configMapRef:
+                name: dinorun-config
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 5000
+            initialDelaySeconds: 20
+            periodSeconds: 5
+            timeoutSeconds: 2
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 5000
+            initialDelaySeconds: 20
+            periodSeconds: 5
+            timeoutSeconds: 2
+          lifecycle:
+            preStop:
+              exec:
+                command: ["sh", "-c", "sleep 5"]
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dinorun-service
+spec:
+  selector:
+    app: dinorun
+  ports:
+    - name: http-proxy
+      protocol: TCP
+      port: 5000
+      targetPort: 5000
+
+---

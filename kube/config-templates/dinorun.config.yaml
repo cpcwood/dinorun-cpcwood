@@ -1,0 +1,16 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dinorun-config
+data:
+  DB_HOST: <k8s-db-service>
+  DB_PASSWORD: <prod-psql-user>
+  DB_USERNAME: <prod-psql-password>
+  DBNAME_PRODUCTION: dinorun_production
+  AWS_ACCESS_KEY_ID:
+  AWS_BUCKET:
+  AWS_REGION:
+  AWS_SECRET_ACCESS_KEY:
+  SECRET_KEY_BASE:
+---

@@ -1,0 +1,105 @@
+version: 2.1
+
+orbs:
+  ruby: circleci/ruby@1.0 
+  node: circleci/node@2
+  docker: circleci/docker@1.5.0
+  kubernetes: circleci/kubernetes@0.11.2
+
+workflows:
+  version: 2
+  test_build_deploy:
+    jobs:
+      - test
+      - build:
+          requires:
+            - test
+          filters:
+             branches:
+               only: master
+      - deploy:
+          requires:
+            - test
+            - build
+          filters:
+             branches:
+               only: master
+
+jobs:
+  test:
+    docker:
+      - image: circleci/ruby:2.7.2-node-browsers 
+      - image: circleci/postgres:alpine
+        environment:
+          POSTGRES_USER: cpcwood-circleci
+          POSTGRES_PASSWORD: "test"
+          POSTGRES_DB: dinorun_test
+    environment:
+      BUNDLE_JOBS: "3"
+      BUNDLE_RETRY: "3"
+      PGHOST: 127.0.0.1
+      PGUSER: cpcwood-circleci
+      PGPASSWORD: "test"
+      DB_NAME_TEST: dinorun_test
+      RAILS_ENV: test
+    steps:
+      - checkout
+      - ruby/install-deps 
+      - node/install-packages:
+          pkg-manager: yarn
+          cache-key: "yarn.lock"
+      - run:
+          name: 'Wait for DB'
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          name: 'Database setup'
+          command: bundle exec rails db:schema:load --trace
+      - ruby/rspec-test
+      - run:
+          name: 'Rubocop linter'
+          command: bundle exec rubocop -a
+  build:
+    docker:
+      - image: docker
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 19.03.13
+          docker_layer_caching: true
+      - run:
+          name: 'Build dinorun image'
+          command: |
+            docker build \
+                -t "$DOCKER_USERNAME/dinorun:$(echo $CIRCLE_SHA1 | head -c8)" \
+                -t $DOCKER_USERNAME/dinorun:latest \
+                .
+      - run:
+          name: 'Publish images'
+          command: |
+            echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin >/dev/null 2>&1
+            docker push "$DOCKER_USERNAME/dinorun:latest"
+            docker push "$DOCKER_USERNAME/dinorun:$(echo $CIRCLE_SHA1 | head -c8)"
+  deploy:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - kubernetes/install-kubectl
+      - run:
+          name: 'Update config files in ./kube with current container version'
+          command: find ./kube/ -type f | xargs sed -i "s/CONTAINER_VERSION/$(echo $CIRCLE_SHA1 | head -c8)/g"
+      - run:
+          name: 'Creating cluster certificate from ENV'
+          command: echo "$KUBERNETES_CLUSTER_CERTIFICATE" | base64 --decode > cert.crt
+      - run:
+          name: 'Apply Kubernetes config to server'
+          command: |
+            kubectl --kubeconfig=/dev/null \
+                --certificate-authority=cert.crt \
+                --server=$KUBERNETES_SERVER \
+                --token=$KUBERNETES_SERVICE_ACC_TOKEN \
+                apply -Rf ./kube/app/
+      - run:
+          name: 'Remove cluster certificate artifact'
+          command: rm -f cert.crt
+          when: always
