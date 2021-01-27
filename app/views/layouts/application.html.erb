@@ -9,21 +9,13 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <link rel="icon" type="image/png" href="favicon.png">
     <link href="https://fonts.googleapis.com/css?family=Caesar+Dressing&display=swap" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=<%=ENV['GTAG']%>"></script>
     <script>
-      (function() {
-        $.ajax({
-          url: '/session.json',
-          type: "GET",
-          beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))}
-        }).done(function( data ) {
-          if (data) {
-            $('#logged-out').toggle()
-          } else {
-            $('#logged-in').toggle()
-          }
-        })
-      })()
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', '<%=ENV['GTAG']%>');
     </script>
   </head>
 

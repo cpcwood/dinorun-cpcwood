@@ -5,13 +5,10 @@
 
 require("@rails/ujs").start()
 require("@rails/activestorage").start()
+require('jquery')
 
-// Uncomment to copy all static images under ../images to the output folder and reference
-// them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
-// or the `imagePath` JavaScript helper below.
-//
-// const images = require.context('../images', true)
-// window.imagePath = (name) => images(name, true)
+// Session
+import initalizeSession from './session/initalizeSession';
 
 // Game Packs
 require("packs/game/background")
@@ -40,6 +37,7 @@ import { generateCanvas } from './homepage_interface/generateCanvas.js'
 
 // Load Page => new game
 window.addEventListener('load', function() {
+  initalizeSession()
   touchOrWebInstructions()
   generateCanvas()
   var gameController
