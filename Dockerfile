@@ -65,7 +65,7 @@ ENV BUNDLE_PATH=$APP_HOME/vendor/bundle \
   PATH=$APP_HOME/vendor/bundle/bin:$APP_HOME/vendor/bundle:$APP_HOME/node_modules/.bin:$PATH
 
 RUN apk add --no-cache \
-  tzdata \
+  tzdata shared-mime-info \
   postgresql-client && \
   cp /usr/share/zoneinfo/Europe/London /etc/localtime && \
   echo "Europe/London" > /etc/timezone
